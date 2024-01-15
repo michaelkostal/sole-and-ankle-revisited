@@ -7,6 +7,7 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from '../UnstyledButton';
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
@@ -19,35 +20,34 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
+        </LogoWrapper>
 
-        <Nav>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
+        </DesktopNav>
 
-        <Side>
-        </Side>
-          <MobileNav>
-            <Button>
+        <Filler />
+          <MobileActions>
+            <UnstyledButton>
               <Icon id="shopping-bag" strokeWidth={2} />
               <VisuallyHidden>Shopping bag</VisuallyHidden>
-            </Button>
-            <Button>
+            </UnstyledButton>
+            <UnstyledButton>
               <Icon id="search" strokeWidth={2} />
               <VisuallyHidden>Search</VisuallyHidden>
-            </Button>
-            <MenuButton onClick={() => setShowMobileMenu(true)}>
+            </UnstyledButton>
+            <UnstyledButton onClick={() => setShowMobileMenu(true)}>
               <Icon id="menu" strokeWidth={2} />
               <VisuallyHidden>Open menu</VisuallyHidden>
-            </MenuButton>
-          </MobileNav>
+            </UnstyledButton>
+          </MobileActions>
       </MainHeader>
       
       <MobileMenu
@@ -58,15 +58,6 @@ const Header = () => {
     </header>
   );
 };
-const Button = styled.button`
-  background:none;
-  border:none;
-`
-const MenuButton = styled(Button)`
-
-`
-
-
 
 const MainHeader = styled.div`
   display: flex;
@@ -77,25 +68,25 @@ const MainHeader = styled.div`
   @media(${QUERIES.tabletAndSmaller}){
     align-items: center;
     border-top: 4px solid ${COLORS.gray[900]};
-    padding: 24px 16px 20px;
+  }
+  @media(${QUERIES.phoneAndSmaller}){
+    padding-inline:16px;
   }
 `;
 
-const MobileNav = styled.nav`
+const MobileActions = styled.div`
   display:none;
   @media(${QUERIES.tabletAndSmaller}){
     display:flex;
-    gap:16px;
+    gap:32px;
     margin-left:auto;
-    min-width:138px;
   }
   @media(${QUERIES.phoneAndSmaller}){
-    min-width:105px;
-    gap:0;
+    gap:16px;
   }
 `
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
@@ -104,9 +95,19 @@ const Nav = styled.nav`
   }
 `;
 
-const Side = styled.div`
+const LogoWrapper = styled.div`
   flex: 1;
+  @media(${QUERIES.tabletAndSmaller}){
+    flex: revert;
+  }
 `;
+
+const Filler = styled.div`
+  flex: 1;
+  @media(${QUERIES.tabletAndSmaller}){
+    display:none;
+  }
+`
 
 const NavLink = styled.a`
   font-size: 1.125rem;

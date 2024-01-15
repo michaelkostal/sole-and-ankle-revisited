@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
-  @media(${QUERIES.phone}){
+  @media(${QUERIES.tablet}){
     display:none;
   }
   

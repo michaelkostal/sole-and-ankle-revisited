@@ -5,7 +5,8 @@ import { COLORS, WEIGHTS, QUERIES } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
-
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
@@ -21,6 +22,7 @@ const Header = () => {
         <Side>
           <Logo />
         </Side>
+
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -29,16 +31,42 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
-        <Side />
-      </MainHeader>
 
+        <Side>
+        </Side>
+          <MobileNav>
+            <Button>
+              <Icon id="shopping-bag" strokeWidth={2} />
+              <VisuallyHidden>Shopping bag</VisuallyHidden>
+            </Button>
+            <Button>
+              <Icon id="search" strokeWidth={2} />
+              <VisuallyHidden>Search</VisuallyHidden>
+            </Button>
+            <MenuButton onClick={() => setShowMobileMenu(true)}>
+              <Icon id="menu" strokeWidth={2} />
+              <VisuallyHidden>Open menu</VisuallyHidden>
+            </MenuButton>
+          </MobileNav>
+      </MainHeader>
+      
       <MobileMenu
         isOpen={showMobileMenu}
         onDismiss={() => setShowMobileMenu(false)}
-      />
+      >
+      </MobileMenu>
     </header>
   );
 };
+const Button = styled.button`
+  background:none;
+  border:none;
+`
+const MenuButton = styled(Button)`
+
+`
+
+
 
 const MainHeader = styled.div`
   display: flex;
@@ -46,15 +74,34 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-  @media(${QUERIES.phone}){
+  @media(${QUERIES.tablet}){
+    align-items: center;
     border-top: 4px solid ${COLORS.gray[900]};
+    padding: 24px 16px 20px;
   }
 `;
+
+const MobileNav = styled.nav`
+  display:none;
+  @media(${QUERIES.tablet}){
+    display:flex;
+    gap:16px;
+    margin-left:auto;
+    min-width:138px;
+  }
+  @media(${QUERIES.phone}){
+    min-width:105px;
+    gap:0;
+  }
+`
 
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+  @media(${QUERIES.tablet}){
+    display:none;
+  }
 `;
 
 const Side = styled.div`

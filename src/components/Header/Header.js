@@ -74,7 +74,7 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-  @media(${QUERIES.tablet}){
+  @media(${QUERIES.tabletAndSmaller}){
     align-items: center;
     border-top: 4px solid ${COLORS.gray[900]};
     padding: 24px 16px 20px;
@@ -83,13 +83,13 @@ const MainHeader = styled.div`
 
 const MobileNav = styled.nav`
   display:none;
-  @media(${QUERIES.tablet}){
+  @media(${QUERIES.tabletAndSmaller}){
     display:flex;
     gap:16px;
     margin-left:auto;
     min-width:138px;
   }
-  @media(${QUERIES.phone}){
+  @media(${QUERIES.phoneAndSmaller}){
     min-width:105px;
     gap:0;
   }
@@ -99,7 +99,7 @@ const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
-  @media(${QUERIES.tablet}){
+  @media(${QUERIES.tabletAndSmaller}){
     display:none;
   }
 `;

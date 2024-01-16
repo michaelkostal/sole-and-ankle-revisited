@@ -82,7 +82,7 @@ const NavLink = styled.a`
     color:black;
 
     &:first-of-type{
-      color: ${COLORS.secondary};
+      color: var(--secondary);
     }
 `
 
@@ -97,7 +97,7 @@ const Footer = styled.footer`
 const FooterLink = styled.a`
     text-decoration:none;
     font-size:${14/16}rem;
-    color:${COLORS.gray[700]}
+    color:var(--gray-700)
 `
 
 export default MobileMenu;

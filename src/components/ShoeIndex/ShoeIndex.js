@@ -1,20 +1,36 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS, QUERIES } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
 import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
-
+const ShoeBreadCrumbs = () => {
+  return (
+    <Breadcrumbs>
+      <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale/shoes">
+        Shoes
+      </Breadcrumbs.Crumb>
+    </Breadcrumbs>
+  )
+}
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
+          <div>
+          <MobileBreadcrumbs>
+            <ShoeBreadCrumbs />
+          </MobileBreadcrumbs>
           <Title>Running</Title>
+          </div>
+          <SelectWrapper>
           <Select
             label="Sort"
             value={sortId}
@@ -23,18 +39,15 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             <option value="newest">Newest Releases</option>
             <option value="price">Price</option>
           </Select>
+          </SelectWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
       </MainColumn>
       <LeftColumn>
-        <Breadcrumbs>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">
-            Shoes
-          </Breadcrumbs.Crumb>
-        </Breadcrumbs>
+        <DesktopBreakcrumbs>
+          <ShoeBreadCrumbs />
+        </DesktopBreakcrumbs>
         <Spacer size={42} />
         <ShoeSidebar />
       </LeftColumn>
@@ -49,18 +62,44 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
+const SelectWrapper = styled.div`
+  @media(${QUERIES.phoneAndSmaller}){
+    display:none;
+  }
+`
+
+const MobileBreadcrumbs = styled.div`
+  display:none;
+  @media(${QUERIES.tabletAndSmaller}){
+    display:revert;
+  }
+`
+
+const DesktopBreakcrumbs = styled.div`
+  @media(${QUERIES.tabletAndSmaller}){
+    display:none;
+  }
+`
+
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  @media(${QUERIES.tabletAndSmaller}){
+    display:none;
+  }
 `;
 
 const MainColumn = styled.div`
   flex: 1;
+  
 `;
 
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  @media(${QUERIES.tabletAndSmaller}){
+    align-items:flex-end;
+  }
 `;
 
 const Title = styled.h2`
